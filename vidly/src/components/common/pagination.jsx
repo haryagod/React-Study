@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import _ from "lodash";
 const Pagination = (props) => {
   const { dataCount, pageSize, currentPage, handlePagination } = props;
@@ -14,17 +14,23 @@ const Pagination = (props) => {
     <nav aria-label="Page navigation example">
       <ul className="pagination">
         {pageArray.map((page) =>
-          page == currentPage ? (
+          page === currentPage ? (
             <li key={page} className="page-item active">
-              <a className="page-link " onClick={() => handlePagination(page)}>
+              <button
+                className="page-link "
+                onClick={() => handlePagination(page)}
+              >
                 {page}
-              </a>
+              </button>
             </li>
           ) : (
             <li key={page} className="page-item">
-              <a className="page-link" onClick={() => handlePagination(page)}>
+              <button
+                className="page-link"
+                onClick={() => handlePagination(page)}
+              >
                 {page}
-              </a>
+              </button>
             </li>
           )
         )}

@@ -4,7 +4,6 @@ import { getMovies } from "../services/fakeMovieService";
 import { filterListGroup } from "../util/filterListGroup";
 import _ from "lodash";
 import { paginate } from "../util/paginate";
-import Like from "./common/like";
 import { ListGroup } from "./common/listGroup";
 import Pagination from "./common/pagination";
 import MoviesTable from "./moviesTable";
@@ -25,19 +24,18 @@ class Movies extends Component {
     this.handlePagination(1);
   }
 
- //handlers 
+  //handlers
   handleDelete = (rowId) => {
     const { currentPage, pageSize } = this.state;
-    const movies = this.state.movies.filter((e) => e._id != rowId);
+    const movies = this.state.movies.filter((e) => e._id !== rowId);
     const checkItems = paginate(movies, currentPage, pageSize);
-    if (checkItems == 0) this.setState({ currentPage: currentPage - 1 });
+    if (checkItems === 0) this.setState({ currentPage: currentPage - 1 });
 
     this.setState({ movies });
   };
   handleLike = (movieId) => {
-     
     const movies = [...this.state.movies];
-    const index = movies.findIndex((e) => e._id == movieId);
+    const index = movies.findIndex((e) => e._id === movieId);
     movies[index] = { ...movies[index] };
     movies[index].like = !movies[index].like;
     this.setState({ movies });
@@ -54,7 +52,7 @@ class Movies extends Component {
     this.setState({ sortColumn });
   };
 
- //handlers End
+  //handlers End
 
   renderData() {
     const { currentPage, movies, pageSize, currentItem, sortColumn } =
@@ -82,18 +80,17 @@ class Movies extends Component {
               onSort={this.handleSort}
               sortColumn={sortColumn}
               onLike={this.handleLike}
-              handleDelete={this.handleDelete}
+              onDelete={this.handleDelete}
             />
           </div>
         </div>
         <div className="d-flex justify-content-center flex-row">
-
-        <Pagination 
-              dataCount={count}
-              currentPage={currentPage}
-              handlePagination={this.handlePagination}
-              pageSize={pageSize}
-            />
+          <Pagination
+            dataCount={count}
+            currentPage={currentPage}
+            handlePagination={this.handlePagination}
+            pageSize={pageSize}
+          />
         </div>
       </React.Fragment>
     );

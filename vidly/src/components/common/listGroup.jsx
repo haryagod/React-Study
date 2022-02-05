@@ -1,10 +1,9 @@
 import React from "react";
-export const ListGroup = (props) => {
-  const { items, currentItem, itemClicked } = props;
+export const ListGroup = ({ items, currentItem, itemClicked }) => {
   return (
     <ul className="list-group sm border border-primary">
       {items.map((item) =>
-        item._id == currentItem ? (
+        item._id === currentItem ? (
           <li
             className="list-group-item active"
             onClick={() => itemClicked(item)}
